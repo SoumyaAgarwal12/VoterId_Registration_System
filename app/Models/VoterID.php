@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes; 
 
-class VoterUser extends Model
+class VoterID extends Model
 {
     use HasFactory, SoftDeletes;
-
-    public function getCreatedAtAttribute($value){
+    
+    public function getDobAttribute($value){
         return date("m-d-y", strtotime($value));
     }
 }

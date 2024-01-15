@@ -13,7 +13,8 @@ class VoterUserController extends Controller
      */
     public function index()
     {
-        return view("RegisteredUsers.index");
+        $allusers = VoterUser::get();
+        return view("RegisteredUsers.allUsers",compact("allusers"));
     }
 
     /**
@@ -21,7 +22,7 @@ class VoterUserController extends Controller
      */
     public function create()
     {
-        //
+        return view("RegisteredUsers.create");
     }
 
     /**
@@ -78,4 +79,10 @@ class VoterUserController extends Controller
     {
         //
     }
+
+    public function getUsers(VoterUser $voterUser)
+    {
+        //
+    }
 }
+

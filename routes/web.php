@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VoterUserController;
+use App\Http\Controllers\VoterIDController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,5 @@ Route::get('/', function () {
 });
 
 Route::resource('register', VoterUserController::class);
+
+Route::resource('voterUser', VoterIDController::class);

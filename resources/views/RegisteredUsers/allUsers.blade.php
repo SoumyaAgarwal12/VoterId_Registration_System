@@ -8,26 +8,47 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>VoterID Registration Form</title>
+    <title>Registration Users</title>
     <style>
         .main_heading{
             display: flex;
             justify-content: center;
             margin-top: 25px;
         }
-        .registerUser{
-            display: flex;
-            margin: 20px;
+        .registerForm{
+            margin: 100px;
+            padding: 15px;
+            margin-top: 42px;
         }
     </style>
   </head>
   <body>
-    <h1 class="main_heading">Welcome!!</h1>
-    <a href="{{ route('register.create') }}" class="registerUser">User Registration</a>
-    <a href="{{ route('register.index') }}" class="registerUser">Get All Registered users</a>
-    <a href="{{ route('voterUser.create') }}" class="registerUser">VoterID Registration</a>
-    <a href="{{ route('voterUser.index') }}" class="registerUser">Get All VoterID users</a>
+    <h1 class="main_heading">All registered Users</h1>
+{{-- {{ $allusers }} --}}
 
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email Id</th>
+        <th scope="col">Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+        @foreach ($allusers as $key => $val)
+            <tr>
+            <th scope="row">{{ $allusers[$key]->id }}</th>
+            <td>{{ $allusers[$key]->firstName }}</td>
+            <td>{{ $allusers[$key]->lastName }}</td>
+            <td>{{ $allusers[$key]->email }}</td>
+            <td>{{ $allusers[$key]->created_at }}</td>
+          </tr>
+        @endforeach
+    </tbody>
+</table>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
