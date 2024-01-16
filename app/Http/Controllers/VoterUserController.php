@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\VoterUser;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Mail\UserVerification;
+use Illuminate\Support\Facades\Mail;
 
 class VoterUserController extends Controller
 {
@@ -45,7 +47,9 @@ class VoterUserController extends Controller
         $registerUsers->password = $_REQUEST['password'];
         $registerUsers->save();
 
-        return redirect()->back()->with('success','Your Registration has done');
+        Mail::to($registerUsers->email)->send(new UserVerification($registerUsers));
+
+        return redirect()->back()->with('success','Your Registration has done. Please check you registered Email Id.');
     }
 
     /**

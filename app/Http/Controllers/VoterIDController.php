@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\VoterID;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Mail\VoterIDMail;
+use Illuminate\Support\Facades\Mail;
 
 class VoterIDController extends Controller
 {
@@ -55,7 +57,9 @@ class VoterIDController extends Controller
         $dbData->state = $_REQUEST['state'];
         $dbData->save();
 
-        return redirect()->back()->with('success','Your VoterID Registration has done.');
+        Mail::to($dbData->email)->send(new VoterIDMail($dbData));
+
+        return redirect()->back()->with('success','Your VoterID Registration has done. Please check you registered Email Id.');
     }
 
     /**
