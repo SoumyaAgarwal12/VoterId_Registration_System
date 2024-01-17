@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VoterUserController;
 use App\Http\Controllers\VoterIDController;
 use App\Http\Controllers\LoginController;
+// use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,12 +27,11 @@ Route::resource('voterUser', VoterIDController::class);
 
 Route::resource('login', LoginController::class);
 
+// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('UserCheck');
+
 Route::get('/dashboard', function () {
     return view('login.index');
-})->name('dashboard');
+})->name('dashboard')->middleware('UserCheck');
 
-// Route::resource('login', LoginController::class, [
-//     'names' => [
-//         'index' => 'login.dashboard',
-//     ]
-// ]);
+
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

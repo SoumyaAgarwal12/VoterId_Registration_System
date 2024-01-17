@@ -25,7 +25,7 @@
     <h1 class="main_heading">Welcome!!</h1>
     <a href="{{ route('register.index') }}" class="registerUser">Get All Registered users</a>
     <a href="{{ route('voterUser.index') }}" class="registerUser">Get All VoterID users</a>
-    {{-- <a href="" class="registerUser">Logout</a> --}}
+    <a href="{{ route('logout') }}" class="registerUser">Logout</a>
 
 
     <!-- Optional JavaScript -->

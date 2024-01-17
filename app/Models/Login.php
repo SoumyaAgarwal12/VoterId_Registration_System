@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Login extends Model
 {
     use HasFactory;
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
 }

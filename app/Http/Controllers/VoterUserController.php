@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\VoterUser;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Mail\UserVerification;
@@ -15,7 +15,7 @@ class VoterUserController extends Controller
      */
     public function index()
     {
-        $allusers = VoterUser::get();
+        $allusers = User::get();
         return view("RegisteredUsers.allUsers",compact("allusers"));
     }
 
@@ -40,11 +40,11 @@ class VoterUserController extends Controller
             'comfirmPassword' => ['required']
         ]);
 
-        $registerUsers = new VoterUser;
+        $registerUsers = new User;
         $registerUsers->firstName = $_REQUEST['first_name'];
         $registerUsers->lastName = $_REQUEST['last_name'];
         $registerUsers->email = $_REQUEST['emailId'];
-        $registerUsers->password = $_REQUEST['password'];
+        $registerUsers->password = bcrypt($_REQUEST['password']);
         $registerUsers->save();
 
         Mail::to($registerUsers->email)->send(new UserVerification($registerUsers));

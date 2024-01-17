@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Login;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\VoterUser;
+use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
+use Auth;
 
 class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         return view("login.create");
@@ -36,12 +38,17 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (VoterUser::where('email',$request->emailId)->exists() && VoterUser::where('password',$request->password)->exists()) {
-            // return Redirect::to('login.index');
+        $data = [
+            "email" => $request->emailId,
+            "password" => $request->password
+        ];
+
+
+        if (Auth::attempt($data)) {
             return redirect()->route('dashboard');
-        } else {
+         } else {
             return Redirect::back()->withErrors(['msg' => 'Please Enter Valid UserName and Password']);
-        }
+         }
     }
 
     /**
@@ -74,5 +81,10 @@ class LoginController extends Controller
     public function destroy(Login $login)
     {
         //
+    }
+
+    public function logout(Request $request) {
+        Auth::logout();
+        return redirect()->route('login.index');
     }
 }
