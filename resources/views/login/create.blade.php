@@ -15,20 +15,38 @@
             justify-content: center;
             margin-top: 25px;
         }
-        .registerUser{
-            display: flex;
-            margin: 20px;
+        .loginForm{
+            margin: 100px;
+            padding: 15px;
+            margin-top: 42px;
         }
     </style>
   </head>
   <body>
-    <h1 class="main_heading">Welcome!!</h1>
-    <a href="{{ route('register.create') }}" class="registerUser">User Registration</a>
-    {{-- <a href="{{ route('register.index') }}" class="registerUser">Get All Registered users</a> --}}
-    <a href="{{ route('voterUser.create') }}" class="registerUser">VoterID Registration</a>
-    {{-- <a href="{{ route('voterUser.index') }}" class="registerUser">Get All VoterID users</a> --}}
-    <a href="{{ route('login.index') }}" class="registerUser">Login</a>
+    <h1 class="main_heading">Login</h1>
+    @if(session('success'))
+        <div>{{ session('success') }}</div>
+    @endif
 
+    @if($errors->any())
+        @foreach($errors->all() as $error)
+            {{ $error }}<br>
+        @endforeach
+    @endif
+    <form class="loginForm" action="{{ route('login.store') }}" method="post">
+        @csrf 
+      <div class="form-row">
+          <div class="form-group col-md-8">
+              <label for="inputEmail4">Email</label>
+              <input type="email" class="form-control" name="emailId" id="emailId" placeholder="Email">
+          </div>
+          <div class="form-group col-md-8">
+              <label for="inputPassword4">Password</label>
+              <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+          </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+  </form>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

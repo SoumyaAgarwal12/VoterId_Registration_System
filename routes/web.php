@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VoterUserController;
 use App\Http\Controllers\VoterIDController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,15 @@ Route::get('/', function () {
 Route::resource('register', VoterUserController::class);
 
 Route::resource('voterUser', VoterIDController::class);
+
+Route::resource('login', LoginController::class);
+
+Route::get('/dashboard', function () {
+    return view('login.index');
+})->name('dashboard');
+
+// Route::resource('login', LoginController::class, [
+//     'names' => [
+//         'index' => 'login.dashboard',
+//     ]
+// ]);
